@@ -1,3 +1,33 @@
+/* Main Style */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Snake Board Style  */
+.container {
+    width: 800px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-board {
     background-color: black;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    
+    /* Repeat the boxes 30 times */
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: repeat(30, 1fr);
 }
