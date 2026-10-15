@@ -35,3 +35,7 @@ body {
 .snake-head {
     background-color: gray;
 }
+
+.snake-food {
+    background-color: red;
+}
