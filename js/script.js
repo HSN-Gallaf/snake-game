@@ -18,6 +18,9 @@ let vectorY = 0;
 let foodX;
 let foodY;
 
+// Game Intreval
+let gameIntreval;
+
 // Others: Score, Speed, Level
 
 // Cache Elements:
@@ -30,7 +33,7 @@ const foodElement = document.createElement("div");
 const initGame = () => {
   addFood();
 
-  setInterval(startGame, 100);
+  gameIntreval = setInterval(startGame, 100);
 };
 
 const ditectUserClick = (event) => {
@@ -58,6 +61,15 @@ const addFood = () => {
   foodElement.style.gridArea = `${foodY} / ${foodX}`;
 };
 
+const gameOver = () => {
+  vectorX = 0;
+  vectorY = 0;
+
+  snakeArray.length = 0;
+
+  clearInterval(gameIntreval);
+};
+
 const startGame = () => {
   // snake tail position
   let tailX = snakeArray.length ? snakeArray[snakeArray.length - 1] : headX;
@@ -72,6 +84,12 @@ const startGame = () => {
     addFood();
 
     snakeArray.push([tailX, tailY]);
+  }
+
+  // Check if the snake goes over the game board
+  if (headX < 1 || headY < 1 || headX > gridSize || headY > gridSize) {
+    gameOver();
+    return;
   }
 
   // change position of each body element in the array by adding the position
@@ -98,6 +116,12 @@ const startGame = () => {
     gameBoardElement.appendChild(snakeBodyElement);
     snakeBodyElement.classList.add("snake-body");
     snakeBodyElement.style.gridArea = `${snakeArray[i][1]} / ${snakeArray[i][0]}`;
+
+    // Check if the snake hit itself
+    if (headX === snakeArray[i][0] && headY === snakeArray[i][1]) {
+      gameOver();
+      return;
+    }
   }
 };
 
