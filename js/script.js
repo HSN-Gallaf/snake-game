@@ -2,7 +2,6 @@
 const snakeArray = [];
 
 // Variables:
-//  X and Y; headX, headY, tailX, tailY, foodX, foodY, VectorX, VectorY
 let move = null;
 
 let gridSize = 30;
@@ -19,148 +18,89 @@ let vectorY = 0;
 let foodX;
 let foodY;
 
-// snake tail position
-let lastSnakeArrayIndex = snakeArray.length - 1;
-
-let tailX;
-let tailY;
-
-let newCellX;
-let newCellY;
-
-let preCellX;
-let preCellY;
-// Snake: snake array
 // Others: Score, Speed, Level
 
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
 const snakeHeadElement = document.createElement("div");
-const snakeBodyElement = document.createElement("div");
 const foodElement = document.createElement("div");
 
 // Function:
 
 const initGame = () => {
-  createSnake();
-};
+  addFood();
 
-// Create Snake Head
-const createSnake = () => {
-  gameBoardElement.appendChild(snakeHeadElement);
-  snakeHeadElement.classList.add("snake-head");
-  snakeHeadElement.style.gridColumnStart = headX;
-  snakeHeadElement.style.gridRowStart = headY;
-  snakeArray.unshift([headX, headY]);
+  setInterval(startGame, 100);
 };
-createSnake();
 
 const ditectUserClick = (event) => {
-  if (event.key !== move) {
-    switch (event.key) {
-      case "ArrowUp":
-        move = "ArrowUp";
-        vectorX = 0;
-        vectorY = -1;
-        break;
-      case "ArrowDown":
-        move = "ArrowDown";
-        vectorX = 0;
-        vectorY = 1;
-        break;
-      case "ArrowLeft":
-        move = "ArrowLeft";
-        vectorX = -1;
-        vectorY = 0;
-        break;
-      case "ArrowRight":
-        move = "ArrowRight";
-        vectorX = 1;
-        vectorY = 0;
-        break;
-    }
+  // Detecet keyPress and prevent moving the opasite direction
+  if (event.key === "ArrowUp" && vectorY !== 1) {
+    vectorX = 0;
+    vectorY = -1;
+  } else if (event.key === "ArrowDown" && vectorY !== -1) {
+    vectorX = 0;
+    vectorY = 1;
+  } else if (event.key === "ArrowLeft" && vectorX !== 1) {
+    vectorX = -1;
+    vectorY = 0;
+  } else if (event.key === "ArrowRight" && vectorX !== -1) {
+    vectorX = 1;
+    vectorY = 0;
   }
 };
-
-const moveSnake = () => {
-  headX = vectorX + headX;
-  headY = vectorY + headY;
-  snakeHeadElement.style.gridColumnStart = headX;
-  snakeHeadElement.style.gridRowStart = headY;
-
-  // Update the array head position
-  snakeArray[0][0] = headX;
-  snakeArray[0][1] = headY;
-
-  if (snakeArray.length > 1) {
-    for (let i = 1; i < snakeArray.length; i++) {
-      preCellX = snakeArray[i - 1][0] - vectorX;
-      preCellY = snakeArray[i - 1][1] - vectorY;
-      if (i === 1) {
-        snakeArray[i][0] = headX - vectorX;
-        snakeArray[i][1] = headY - vectorY;
-      } else {
-        snakeArray[i][0] = preCellX;
-        snakeArray[i][1] = preCellY;
-      }
-
-      gameBoardElement.children[i].style.gridColumnStart = snakeArray[i][0];
-      gameBoardElement.children[i].style.gridRowStart = snakeArray[i][1];
-    }
-  }
-};
-
-const gameOver = () => {};
 
 const addFood = () => {
   gameBoardElement.appendChild(foodElement);
   foodElement.classList.add("snake-food");
-  foodX = Math.floor(Math.random() * gridSize);
-  foodY = Math.floor(Math.random() * gridSize);
-
-  foodElement.style.gridColumnStart = foodX;
-  foodElement.style.gridRowStart = foodY;
+  foodX = Math.floor(Math.random() * gridSize) + 1;
+  foodY = Math.floor(Math.random() * gridSize) + 1;
+  foodElement.style.gridArea = `${foodY} / ${foodX}`;
 };
 
-addFood();
+const startGame = () => {
+  // snake tail position
+  let tailX = snakeArray.length ? snakeArray[snakeArray.length - 1] : headX;
+  let tailY = snakeArray.length ? snakeArray[snakeArray.length - 1] : headY;
 
-const eatFood = () => {
+  // move the head on keypress base on the vector
+  headX += vectorX;
+  headY += vectorY;
+
+  // if snake hit the food
   if (foodX === headX && foodY === headY) {
-    gameBoardElement.removeChild(foodElement);
-    addSnakeCell();
-
     addFood();
+
+    snakeArray.push([tailX, tailY]);
+  }
+
+  // change position of each body element in the array by adding the position
+  for (let i = snakeArray.length - 1; i > 0; i--) {
+    snakeArray[i] = snakeArray[i - 1];
+  }
+
+  if (snakeArray.length > 0) {
+    snakeArray[0] = [headX - vectorX, headY - vectorY];
+  }
+
+  gameBoardElement.appendChild(snakeHeadElement);
+  snakeHeadElement.classList.add("snake-head");
+  snakeHeadElement.style.gridArea = `${headY} / ${headX}`;
+
+  for (let child of gameBoardElement.children) {
+    if (child.classList.contains("snake-body")) {
+      child.remove();
+    }
+  }
+
+  for (let i = 0; i < snakeArray.length; i++) {
+    const snakeBodyElement = document.createElement("div");
+    gameBoardElement.appendChild(snakeBodyElement);
+    snakeBodyElement.classList.add("snake-body");
+    snakeBodyElement.style.gridArea = `${snakeArray[i][1]} / ${snakeArray[i][0]}`;
   }
 };
 
-const addSnakeCell = () => {
-  const bodyElement = document.createElement("div");
-  bodyElement.classList.add("snake-body");
-  gameBoardElement.appendChild(bodyElement);
-
-  newCellX = foodX - vectorX;
-  newCellY = foodY - vectorY;
-
-  bodyElement.style.gridColumnStart = newCellX;
-  bodyElement.style.gridRowStart = newCellY;
-
-  snakeArray.push([newCellX, newCellY]);
-};
-
-// Event Listeners:
-
 // Adds listenr for any keyboard click
 window.addEventListener("keydown", ditectUserClick);
-
-// Updates the snake head to make it move
-setInterval(() => {
-  eatFood();
-  moveSnake();
-}, 100);
-
-// This migh cuse error if the food position is same as one of the snake body:
-
-// gameBoardElement.children[i].style.gridColumnStart = snakeArray[i][0];
-// gameBoardElement.children[i].style.gridRowStart = snakeArray[i][1];
-
-// NOTE: ADD A LOCK TO WHEN THE SNAKE IS MOVING UP IT CANT MOVE DOWN AND OPASET AND IF ITS MOVING RIGH IT CANT MOVE LEFT
+initGame();
