@@ -39,3 +39,7 @@ body {
 .snake-food {
     background-color: red;
 }
+
+.snake-body {
+    background-color: green;
+}
