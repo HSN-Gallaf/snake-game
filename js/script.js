@@ -25,6 +25,7 @@ let gameIntreval;
 
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
+const modaleContainerElement = document.querySelector(".modal-container");
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
 
@@ -59,12 +60,12 @@ const changeFoodPosition = () => {
 };
 
 const gameOver = () => {
+  clearInterval(gameIntreval);
+
+  modaleContainerElement.style.display = "flex";
   vectorX = 0;
   vectorY = 0;
-
   snakeArray.length = 0;
-
-  clearInterval(gameIntreval);
 };
 
 const startGame = () => {
