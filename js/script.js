@@ -33,6 +33,8 @@ const gameOverElement = document.querySelector(".game-over-container");
 const currentScoreElement = document.querySelector("#current-score");
 const highestScoreElement = document.querySelector("#highest-score");
 const levelChoiceElement = document.querySelector(".level-container");
+const scoreTextElement = document.querySelector("#score-text");
+
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
 
@@ -73,6 +75,8 @@ const changeFoodPosition = () => {
 
 const gameOver = () => {
   clearInterval(gameIntreval);
+
+  scoreTextElement.textContent = `Your Score: ${score}`;
 
   headX = 15;
   headY = 15;
