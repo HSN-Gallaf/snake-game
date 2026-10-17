@@ -31,7 +31,7 @@ const foodElement = document.createElement("div");
 // Function:
 
 const initGame = () => {
-  addFood();
+  changeFoodPosition();
 
   gameIntreval = setInterval(startGame, 100);
 };
@@ -53,7 +53,7 @@ const ditectUserClick = (event) => {
   }
 };
 
-const addFood = () => {
+const changeFoodPosition = () => {
   foodX = Math.floor(Math.random() * gridSize) + 1;
   foodY = Math.floor(Math.random() * gridSize) + 1;
 };
@@ -78,7 +78,7 @@ const startGame = () => {
 
   // if snake hit the food
   if (foodX === headX && foodY === headY) {
-    addFood();
+    changeFoodPosition();
 
     snakeArray.push([tailX, tailY]);
   }
