@@ -14,7 +14,7 @@ body {
 }
 
 button {
-    background-color: green;
+    background-color: #00f2fe;
     color: white;
     width: 180px;
     height: 50px;
@@ -33,7 +33,7 @@ button {
 }
 
 .game-board {
-    background-color: black;
+    background-color: #0b192c;
     display: grid;
     width: 100%;
     height: 100%;
@@ -44,15 +44,15 @@ button {
 }
 
 .snake-head {
-    background-color: gray;
+    background-color: #ffffff;
 }
 
 .snake-food {
-    background-color: red;
+    background-color: #ef4444;
 }
 
 .snake-body {
-    background-color: green;
+    background-color: #00f2fe;
 }
 
 
