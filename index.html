@@ -18,11 +18,19 @@
     </div>
 
     <!-- Game Over Modal -->
-    <div class="modal-container">
+    <div class="game-over-container">
       <div class="game-over">
         <h1 id="game-over-text">Game Over!</h1>
         <p id="score-text">Your Score:</p>
         <button id="restart-btn" onclick="restartGame()">Restart Game</button>
+      </div>
+    </div>
+
+    <div class="level-container">
+      <div class="levels">
+        <button class="levels-buttons" onclick="initGame(150)">Easy</button>
+        <button class="levels-buttons" onclick="initGame(100)">Medium</button>
+        <button class="levels-buttons" onclick="initGame(70)">Hard</button>
       </div>
     </div>
   </body>

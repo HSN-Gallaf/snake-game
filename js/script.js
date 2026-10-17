@@ -29,9 +29,10 @@ let score = 0;
 
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
-const modaleContainerElement = document.querySelector(".modal-container");
+const gameOverElement = document.querySelector(".game-over-container");
 const currentScoreElement = document.querySelector("#current-score");
 const highestScoreElement = document.querySelector("#highest-score");
+const levelChoiceElement = document.querySelector(".level-container");
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
 
@@ -41,10 +42,11 @@ highestScoreElement.textContent = `Highest Score: ${window.localStorage.getItem(
 
 // Function:
 
-const initGame = () => {
+const initGame = (speed) => {
+  levelChoiceElement.style.display = "none";
   changeFoodPosition();
 
-  gameIntreval = setInterval(startGame, 200);
+  gameIntreval = setInterval(startGame, speed);
 };
 
 const ditectUserClick = (event) => {
@@ -72,7 +74,7 @@ const changeFoodPosition = () => {
 const gameOver = () => {
   clearInterval(gameIntreval);
 
-  modaleContainerElement.style.display = "flex";
+  gameOverElement.style.display = "flex";
   vectorX = 0;
   vectorY = 0;
   snakeArray.length = 0;
@@ -80,7 +82,8 @@ const gameOver = () => {
 };
 
 const restartGame = () => {
-  modaleContainerElement.style.display = "none";
+  gameOverElement.style.display = "none";
+  levelChoiceElement.style.display = "flex";
 };
 
 const startGame = () => {
@@ -157,4 +160,3 @@ const startGame = () => {
 
 // Adds listenr for any keyboard click
 window.addEventListener("keydown", ditectUserClick);
-initGame();
