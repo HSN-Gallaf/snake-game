@@ -45,7 +45,7 @@ body {
 }
 
 .modal-container {
-    display: none;
+    display: flex;
     position: fixed;
     justify-content: center;
     align-items: center;

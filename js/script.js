@@ -68,6 +68,12 @@ const gameOver = () => {
   snakeArray.length = 0;
 };
 
+const restartGame = () => {
+  modaleContainerElement.style.display = "none";
+
+  initGame();
+};
+
 const startGame = () => {
   // snake tail position
   let tailX = snakeArray.length ? snakeArray[snakeArray.length - 1] : headX;
