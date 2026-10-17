@@ -54,11 +54,8 @@ const ditectUserClick = (event) => {
 };
 
 const addFood = () => {
-  gameBoardElement.appendChild(foodElement);
-  foodElement.classList.add("snake-food");
   foodX = Math.floor(Math.random() * gridSize) + 1;
   foodY = Math.floor(Math.random() * gridSize) + 1;
-  foodElement.style.gridArea = `${foodY} / ${foodX}`;
 };
 
 const gameOver = () => {
@@ -92,37 +89,44 @@ const startGame = () => {
     return;
   }
 
-  // change position of each body element in the array by adding the position
-  for (let i = snakeArray.length - 1; i > 0; i--) {
-    snakeArray[i] = snakeArray[i - 1];
-  }
-
-  if (snakeArray.length > 0) {
-    snakeArray[0] = [headX - vectorX, headY - vectorY];
-  }
-
-  gameBoardElement.appendChild(snakeHeadElement);
-  snakeHeadElement.classList.add("snake-head");
-  snakeHeadElement.style.gridArea = `${headY} / ${headX}`;
-
-  for (let child of gameBoardElement.children) {
-    if (child.classList.contains("snake-body")) {
-      child.remove();
-    }
-  }
-
+  // Check if the snake hit itself
   for (let i = 0; i < snakeArray.length; i++) {
-    const snakeBodyElement = document.createElement("div");
-    gameBoardElement.appendChild(snakeBodyElement);
-    snakeBodyElement.classList.add("snake-body");
-    snakeBodyElement.style.gridArea = `${snakeArray[i][1]} / ${snakeArray[i][0]}`;
-
-    // Check if the snake hit itself
     if (headX === snakeArray[i][0] && headY === snakeArray[i][1]) {
       gameOver();
       return;
     }
   }
+
+  // change position of each body element in the array by adding the position
+  for (let i = snakeArray.length - 1; i > 0; i--) {
+    snakeArray[i] = snakeArray[i - 1];
+  }
+
+  // Move the first cell after the head to the head position
+  if (snakeArray.length > 0) {
+    snakeArray[0] = [headX - vectorX, headY - vectorY];
+  }
+
+  // Clear the elements indide the board
+  gameBoardElement.innerHTML = "";
+
+  // Re-render the head with the new position
+  gameBoardElement.appendChild(snakeHeadElement);
+  snakeHeadElement.classList.add("snake-head");
+  snakeHeadElement.style.gridArea = `${headY} / ${headX}`;
+
+  // Re-render the entire body with the new position
+  for (let i = 0; i < snakeArray.length; i++) {
+    const snakeBodyElement = document.createElement("div");
+    gameBoardElement.appendChild(snakeBodyElement);
+    snakeBodyElement.classList.add("snake-body");
+    snakeBodyElement.style.gridArea = `${snakeArray[i][1]} / ${snakeArray[i][0]}`;
+  }
+
+  // Re-render the food with the new position
+  gameBoardElement.appendChild(foodElement);
+  foodElement.classList.add("snake-food");
+  foodElement.style.gridArea = `${foodY} / ${foodX}`;
 };
 
 // Adds listenr for any keyboard click
