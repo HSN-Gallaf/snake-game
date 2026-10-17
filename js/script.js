@@ -74,6 +74,8 @@ const changeFoodPosition = () => {
 const gameOver = () => {
   clearInterval(gameIntreval);
 
+  headX = 15;
+  headY = 15;
   gameOverElement.style.display = "flex";
   vectorX = 0;
   vectorY = 0;
