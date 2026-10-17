@@ -21,20 +21,30 @@ let foodY;
 // Game Intreval
 let gameIntreval;
 
+let score = 0;
+
+// let highestScore = window.localStorage.setItem("highestScore", 0);
+
 // Others: Score, Speed, Level
 
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
 const modaleContainerElement = document.querySelector(".modal-container");
+const currentScoreElement = document.querySelector("#current-score");
+const highestScoreElement = document.querySelector("#highest-score");
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
+
+// Score Defaul Value
+currentScoreElement.textContent = `Score: ${score}`;
+highestScoreElement.textContent = `Highest Score: ${window.localStorage.getItem("highestScore")}`;
 
 // Function:
 
 const initGame = () => {
   changeFoodPosition();
 
-  gameIntreval = setInterval(startGame, 100);
+  gameIntreval = setInterval(startGame, 200);
 };
 
 const ditectUserClick = (event) => {
@@ -66,12 +76,11 @@ const gameOver = () => {
   vectorX = 0;
   vectorY = 0;
   snakeArray.length = 0;
+  score = 0;
 };
 
 const restartGame = () => {
   modaleContainerElement.style.display = "none";
-
-  initGame();
 };
 
 const startGame = () => {
@@ -88,6 +97,16 @@ const startGame = () => {
     changeFoodPosition();
 
     snakeArray.push([tailX, tailY]);
+
+    // Update the score count
+    score++;
+    currentScoreElement.textContent = `Score: ${score}`;
+
+    // Check if the current score is more than the highest score recoreded
+    if (score > window.localStorage.getItem("highestScore")) {
+      window.localStorage.setItem("highestScore", score);
+      highestScoreElement.textContent = `Highest Score: ${window.localStorage.getItem("highestScore")}`;
+    }
   }
 
   // Check if the snake goes over the game board
