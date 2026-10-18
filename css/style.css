@@ -40,10 +40,16 @@
   color-scheme: light;
 }
 
-#switch-mode-container {
+/* Header Container */
+#header-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 
+}
+
+#header-container button{
+    background-color: transparent;
+    width: 50px;
 }
 
 /* Main Style */

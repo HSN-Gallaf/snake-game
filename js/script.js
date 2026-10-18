@@ -25,6 +25,10 @@ let score = 0;
 
 let theme = "dark";
 
+let gameStatus = "pause";
+
+let speedVar;
+
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
 const gameOverElement = document.querySelector(".game-over-container");
@@ -33,6 +37,7 @@ const highestScoreElement = document.querySelector("#highest-score");
 const levelChoiceElement = document.querySelector(".level-container");
 const scoreTextElement = document.querySelector("#score-text");
 const toggleThemeElement = document.querySelector("#theme-toggle");
+const puseResumeElement = document.querySelector("#puse-resume-btn");
 
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
@@ -47,6 +52,7 @@ highestScoreElement.textContent = `Highest Score: ${window.localStorage.getItem(
 // Function:
 
 const initGame = (speed) => {
+  speedVar = speed;
   levelChoiceElement.style.display = "none";
   changeFoodPosition();
 
@@ -95,6 +101,9 @@ const restartGame = () => {
 };
 
 const startGame = () => {
+  if (gameStatus === "resume") {
+    return;
+  }
   // snake tail position
   let tailX = snakeArray.length ? snakeArray[snakeArray.length - 1] : headX;
   let tailY = snakeArray.length ? snakeArray[snakeArray.length - 1] : headY;
@@ -172,9 +181,25 @@ window.addEventListener("keydown", ditectUserClick);
 toggleThemeElement.addEventListener("click", () => {
   if (theme === "dark") {
     theme = "light";
+    toggleThemeElement.textContent = "🌙";
   } else if (theme === "light") {
     theme = "dark";
+    toggleThemeElement.textContent = "☀️";
   }
 
   document.documentElement.setAttribute("data-theme", theme);
+});
+
+puseResumeElement.addEventListener("click", () => {
+  if (gameStatus === "pause") {
+    gameStatus = "resume";
+    clearInterval(gameIntreval);
+
+    puseResumeElement.textContent = "▶️";
+  } else if (gameStatus === "resume") {
+    gameStatus = "pause";
+    gameIntreval = setInterval(startGame, speedVar);
+
+    puseResumeElement.textContent = "⏸️";
+  }
 });
