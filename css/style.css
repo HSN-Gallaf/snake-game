@@ -1,40 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
 /* Dark and Light */
+
 :root {
     color-scheme: light dark;
 
-    /* game board */
-    --light-board-bg:#00f2fe;
-    --dark-board-bg: #0b192c;
+    /* Body */
+    --light-body-bg: #E1F5FE;
+    --dark-body-bg: #0B1726;
 
-    /* board head(background, text) */
-    --light-board-head-bg: #03666b;
-    --dark-board-head-bg: rgb(1, 2, 35);
+    /* Game board */
+    --light-board-bg: #81D4FA;
+    --dark-board-bg: #142B40;
 
-    --light-board-head-txt: black;
-    --dark-board-head-txt: white;
+    --light-board-glow: #0277BD;
+    --dark-board-glow: #00E5FF;
 
+    /* Board head */
+    --light-board-head-bg: #0277BD;
+    --dark-board-head-bg: #063B59;
 
-    --light-board-boarder: black;
-    --dark-board-boarder: white;
-    /* snake body */
-    --light-snake-body: #0b192c;
-    --dark-snake-body: #00f2fe;
+    --light-board-head-txt: #FFFFFF;
+    --dark-board-head-txt: #FFFFFF;
 
-    /* Modals(text, background) */
-    --light-modal-bg: #03666b;
-    --dark-modal-bg: rgb(1, 2, 35);
+    --light-board-boarder: #01579B;
+    --dark-board-boarder: #00E5FF;
 
-    --light-modal-txt: black;
-    --dark-modal-txt: white;
+    /* Snake body */
+    --light-snake-body: #01579B;
+    --dark-snake-body: #00E5FF;
 
-    /* buttons(background, text) */
-    --light-btn-bg: #0b192c; 
-    --dark-btn-bg: #00f2fe;
+    --light-snake-body-glow: #0288D1;
+    --dark-snake-body-glow: #80DEEA;
 
-    --light-btn-txt: white; 
-    --dark-btn-txt: white;
+    /* Modals */
+    --light-modal-bg: #B3E5FC;
+    --dark-modal-bg: #142B40;
+
+    --light-modal-txt: #063B59;
+    --dark-modal-txt: #FFFFFF;
+
+    /* Buttons */
+    --light-btn-bg: #0277BD;
+    --dark-btn-bg: #00E5FF;
+
+    --light-btn-txt: #FFFFFF;
+    --dark-btn-txt: #003344;
 }
 
 :root[data-theme="dark"] {
@@ -49,7 +60,6 @@
 #header-container {
     display: flex;
     justify-content: space-between;
-
 }
 
 #header-container button{
@@ -71,6 +81,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: light-dark(var(--light-body-bg), var(--dark-body-bg));
 }
 
 button {
@@ -99,7 +110,7 @@ button {
     height: 100%;
 
     border: 1px solid light-dark(var(--light-board-boarder), var(--dark-board-boarder));
-
+    box-shadow: 0 0 5px light-dark(var(--light-board-glow), var(--dark-board-glow));;
     /* Repeat the boxes 30 times */
     grid-template-columns: repeat(30, 1fr);
     grid-template-rows: repeat(30, 1fr);
@@ -107,14 +118,20 @@ button {
 
 .snake-head {
     background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow:0 0 10px rgb(252, 252, 252);
 }
 
 .snake-food {
     background-color: #ef4444;
+    box-shadow:0 0 10px rgb(255, 0, 0);
+    border-radius: 100%;
 }
 
 .snake-body {
     background-color: light-dark(var(--light-snake-body), var(--dark-snake-body));
+    border-radius: 7px;
+    box-shadow: 0 0 7px light-dark(var(--light-snake-body-glow), var(--dark-snake-body-glow));
 }
 
 
