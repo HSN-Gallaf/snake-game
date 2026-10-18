@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+
 /* Dark and Light */
 :root {
     color-scheme: light dark;
@@ -13,6 +15,9 @@
     --light-board-head-txt: black;
     --dark-board-head-txt: white;
 
+
+    --light-board-boarder: black;
+    --dark-board-boarder: white;
     /* snake body */
     --light-snake-body: #0b192c;
     --dark-snake-body: #00f2fe;
@@ -58,6 +63,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Black Ops One", system-ui;
 }
 
 body {
@@ -91,6 +97,8 @@ button {
     display: grid;
     width: 100%;
     height: 100%;
+
+    border: 1px solid light-dark(var(--light-board-boarder), var(--dark-board-boarder));
 
     /* Repeat the boxes 30 times */
     grid-template-columns: repeat(30, 1fr);
@@ -145,7 +153,7 @@ button {
     background-color: light-dark(var(--light-modal-bg), var(--dark-modal-bg));
     justify-content: center;
     align-items: center;
-    width: 400px;
+    width: 300px;
     height: 200px;
     border-radius: 5px;
     color: light-dark(var(--light-modal-txt), var(--dark-modal-txt));
@@ -159,7 +167,9 @@ button {
     font-size: 25px;
 }
 #restart-btn {
-    margin: 30px 100px 0px 100px;
+    margin: 30px 100px 10px 100px;
+    font-size: 20px;
+
 }
 
 
@@ -181,8 +191,8 @@ button {
     background-color: light-dark(var(--light-modal-bg), var(--dark-modal-bg));;
     justify-content: center;
     align-items: center;
-    width: 450px;
-    height: 250px;
+    width: 250px;
+    height: 260px;
     border-radius: 5px;
     color: light-dark(var(--light-modal-txt), var(--dark-modal-txt));
 }
