@@ -23,9 +23,7 @@ let gameIntreval;
 
 let score = 0;
 
-// let highestScore = window.localStorage.setItem("highestScore", 0);
-
-// Others: Score, Speed, Level
+let theme = "dark";
 
 // Cache Elements:
 const gameBoardElement = document.querySelector(".game-board");
@@ -34,9 +32,13 @@ const currentScoreElement = document.querySelector("#current-score");
 const highestScoreElement = document.querySelector("#highest-score");
 const levelChoiceElement = document.querySelector(".level-container");
 const scoreTextElement = document.querySelector("#score-text");
+const toggleThemeElement = document.querySelector("#theme-toggle");
 
 const snakeHeadElement = document.createElement("div");
 const foodElement = document.createElement("div");
+
+// theme default value
+document.documentElement.setAttribute("data-theme", theme);
 
 // Score Defaul Value
 currentScoreElement.textContent = `Score: ${score}`;
@@ -166,3 +168,13 @@ const startGame = () => {
 
 // Adds listenr for any keyboard click
 window.addEventListener("keydown", ditectUserClick);
+
+toggleThemeElement.addEventListener("click", () => {
+  if (theme === "dark") {
+    theme = "light";
+  } else if (theme === "light") {
+    theme = "dark";
+  }
+
+  document.documentElement.setAttribute("data-theme", theme);
+});

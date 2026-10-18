@@ -1,3 +1,51 @@
+/* Dark and Light */
+:root {
+    color-scheme: light dark;
+
+    /* game board */
+    --light-board-bg:#00f2fe;
+    --dark-board-bg: #0b192c;
+
+    /* board head(background, text) */
+    --light-board-head-bg: #03666b;
+    --dark-board-head-bg: rgb(1, 2, 35);
+
+    --light-board-head-txt: black;
+    --dark-board-head-txt: white;
+
+    /* snake body */
+    --light-snake-body: #0b192c;
+    --dark-snake-body: #00f2fe;
+
+    /* Modals(text, background) */
+    --light-modal-bg: #03666b;
+    --dark-modal-bg: rgb(1, 2, 35);
+
+    --light-modal-txt: black;
+    --dark-modal-txt: white;
+
+    /* buttons(background, text) */
+    --light-btn-bg: #0b192c; 
+    --dark-btn-bg: #00f2fe;
+
+    --light-btn-txt: white; 
+    --dark-btn-txt: white;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+#switch-mode-container {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
 /* Main Style */
 
 * {
@@ -14,8 +62,8 @@ body {
 }
 
 button {
-    background-color: #00f2fe;
-    color: white;
+    background-color: light-dark(var(--light-btn-bg), var(--dark-btn-bg));
+    color: light-dark(var(--light-btn-txt), var(--dark-btn-txt));
     width: 180px;
     height: 50px;
     border-radius: 5px;
@@ -33,7 +81,7 @@ button {
 }
 
 .game-board {
-    background-color: #0b192c;
+    background-color: light-dark(var(--light-board-bg), var(--dark-board-bg));
     display: grid;
     width: 100%;
     height: 100%;
@@ -52,7 +100,7 @@ button {
 }
 
 .snake-body {
-    background-color: #00f2fe;
+    background-color: light-dark(var(--light-snake-body), var(--dark-snake-body));
 }
 
 
@@ -61,7 +109,7 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(1, 2, 35);
+    background-color: light-dark(var(--light-board-head-bg), var(--dark-board-head-bg));
     height: 70px;
     width: 100%;
     align-items: center;
@@ -88,12 +136,13 @@ button {
 .game-over {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: light-dark(var(--light-modal-bg), var(--dark-modal-bg));
     justify-content: center;
     align-items: center;
     width: 400px;
     height: 200px;
     border-radius: 5px;
+    color: light-dark(var(--light-modal-txt), var(--dark-modal-txt));
 }
 
 #game-over-text {
@@ -117,19 +166,28 @@ button {
     align-items: center;
     width: 100%;
     height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .levels {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: light-dark(var(--light-modal-bg), var(--dark-modal-bg));;
     justify-content: center;
     align-items: center;
-    width: 400px;
-    height: 200px;
+    width: 450px;
+    height: 250px;
     border-radius: 5px;
+    color: light-dark(var(--light-modal-txt), var(--dark-modal-txt));
 }
 
 .levels-buttons {
     margin: 10px;
+}
+
+.levels p{
+    color: white;
+    font-size: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
 }

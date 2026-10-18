@@ -10,6 +10,11 @@
   <body>
     <!-- Game Board Container -->
     <div class="container">
+      <div id="switch-mode-container">
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+          Switch Theme
+        </button>
+      </div>
       <div id="score-div">
         <p id="current-score">Score:</p>
         <p id="highest-score">Highest Score:</p>
@@ -28,6 +33,7 @@
 
     <div class="level-container">
       <div class="levels">
+        <p>Chose a Level</p>
         <button class="levels-buttons" onclick="initGame(150)">Easy</button>
         <button class="levels-buttons" onclick="initGame(100)">Medium</button>
         <button class="levels-buttons" onclick="initGame(70)">Hard</button>
