@@ -35,7 +35,7 @@
 
     /* Modals */
     --light-modal-bg: #B3E5FC;
-    --dark-modal-bg: #142B40;
+    --dark-modal-bg: #0B1726;
 
     --light-modal-txt: #063B59;
     --dark-modal-txt: #FFFFFF;
@@ -223,4 +223,12 @@ button {
     font-size: 25px;
     margin-left: 20px;
     margin-right: 20px;
+}
+
+
+/* Animation */
+
+.animate__flipInY {
+    animation: filpInY 0.5s ease-in-out;
+    animation-duration: 1s;
 }

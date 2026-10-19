@@ -175,10 +175,13 @@ const startGame = () => {
   foodElement.style.gridArea = `${foodY} / ${foodX}`;
 };
 
-// Adds listenr for any keyboard click
-window.addEventListener("keydown", ditectUserClick);
+const changeTheme = () => {
+  toggleThemeElement.classList.add("animate__flipInY");
 
-toggleThemeElement.addEventListener("click", () => {
+  setTimeout(() => {
+    toggleThemeElement.classList.remove("animate__flipInY");
+  }, 500);
+
   if (theme === "dark") {
     theme = "light";
     toggleThemeElement.textContent = "🌙";
@@ -188,9 +191,15 @@ toggleThemeElement.addEventListener("click", () => {
   }
 
   document.documentElement.setAttribute("data-theme", theme);
-});
+};
 
-puseResumeElement.addEventListener("click", () => {
+const changeGameStatus = () => {
+  puseResumeElement.classList.add("animate__flipInY");
+
+  setTimeout(() => {
+    puseResumeElement.classList.remove("animate__flipInY");
+  }, 500);
+
   if (gameStatus === "pause") {
     gameStatus = "resume";
     clearInterval(gameIntreval);
@@ -202,4 +211,11 @@ puseResumeElement.addEventListener("click", () => {
 
     puseResumeElement.textContent = "⏸️";
   }
-});
+};
+
+// Adds listenr for any keyboard click
+window.addEventListener("keydown", ditectUserClick);
+
+toggleThemeElement.addEventListener("click", changeTheme);
+
+puseResumeElement.addEventListener("click", changeGameStatus);
