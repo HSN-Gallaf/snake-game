@@ -1,6 +1,6 @@
 // Constants:
 const snakeArray = [];
-
+const eatFoodSound = new Audio("./assets/eat-food.mp3");
 // Variables:
 let move = null;
 
@@ -114,6 +114,7 @@ const startGame = () => {
 
   // if snake hit the food
   if (foodX === headX && foodY === headY) {
+    eatFoodSound.play();
     changeFoodPosition();
 
     snakeArray.push([tailX, tailY]);
