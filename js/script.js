@@ -194,23 +194,25 @@ const changeTheme = () => {
   document.documentElement.setAttribute("data-theme", theme);
 };
 
-const changeGameStatus = () => {
-  puseResumeElement.classList.add("animate__flipInY");
+const changeGameStatus = (event) => {
+  if (event.code === "Space") {
+    puseResumeElement.classList.add("animate__flipInY");
 
-  setTimeout(() => {
-    puseResumeElement.classList.remove("animate__flipInY");
-  }, 500);
+    setTimeout(() => {
+      puseResumeElement.classList.remove("animate__flipInY");
+    }, 500);
 
-  if (gameStatus === "pause") {
-    gameStatus = "resume";
-    clearInterval(gameIntreval);
+    if (gameStatus === "pause") {
+      gameStatus = "resume";
+      clearInterval(gameIntreval);
 
-    puseResumeElement.textContent = "▶️";
-  } else if (gameStatus === "resume") {
-    gameStatus = "pause";
-    gameIntreval = setInterval(startGame, speedVar);
+      puseResumeElement.textContent = "▶️";
+    } else if (gameStatus === "resume") {
+      gameStatus = "pause";
+      gameIntreval = setInterval(startGame, speedVar);
 
-    puseResumeElement.textContent = "⏸️";
+      puseResumeElement.textContent = "⏸️";
+    }
   }
 };
 
@@ -219,4 +221,4 @@ window.addEventListener("keydown", ditectUserClick);
 
 toggleThemeElement.addEventListener("click", changeTheme);
 
-puseResumeElement.addEventListener("click", changeGameStatus);
+window.addEventListener("keydown", changeGameStatus);
