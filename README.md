@@ -2,6 +2,10 @@
 
 A classic Snake Game built using **HTML, CSS, and JavaScript**. Control the snake, collect food, increase your score, and try to beat your highest score without hitting the walls or your own body.
 
+## 📸 Preview
+
+![Snake Game Preview](assets/game-screen.png)
+
 ## 🎮 Features
 
 - **Three Difficulty Levels:** Choose between Easy, Medium, and Hard.
