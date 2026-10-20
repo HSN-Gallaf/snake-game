@@ -1,6 +1,10 @@
 // Constants:
 const snakeArray = [];
+
+// Sounds:
 const eatFoodSound = new Audio("./assets/eat-food.mp3");
+const gameOverSound = new Audio("./assets/game-over.mp3");
+
 // Variables:
 let move = null;
 
@@ -49,7 +53,7 @@ document.documentElement.setAttribute("data-theme", theme);
 currentScoreElement.textContent = `Score: ${score}`;
 highestScoreElement.textContent = `Highest Score: ${window.localStorage.getItem("highestScore")}`;
 
-// Function:
+// Functions:
 
 const initGame = (speed) => {
   speedVar = speed;
@@ -82,6 +86,8 @@ const changeFoodPosition = () => {
 };
 
 const gameOver = () => {
+  gameOverSound.play();
+
   clearInterval(gameIntreval);
 
   scoreTextElement.textContent = `Your Score: ${score}`;
