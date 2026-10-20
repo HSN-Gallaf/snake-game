@@ -15,7 +15,10 @@
 
     --light-board-glow: #0277BD;
     --dark-board-glow: #00E5FF;
-
+    
+    --light-board-boarder: #81D4FA;
+    --dark-board-boarder: #031628;
+    
     /* Board head */
     --light-board-head-bg: #0277BD;
     --dark-board-head-bg: #063B59;
@@ -62,6 +65,11 @@
     justify-content: space-between;
 }
 
+#theme-toggle, #puse-resume-btn {
+    margin-bottom: 5px;
+    border: 1px solid;
+    box-shadow: 0 0 8px light-dark(var(--light-board-glow), var(--dark-board-glow));
+}
 #header-container button{
     background-color: transparent;
     width: 50px;
@@ -98,7 +106,7 @@ button {
 /* Snake Board Style  */
 .container {
     width: 800px;
-    height: 700px;
+    height: 800px;
     display: flex;
     flex-direction: column;
 }
@@ -110,28 +118,44 @@ button {
     height: 100%;
 
     border: 1px solid light-dark(var(--light-board-boarder), var(--dark-board-boarder));
-    box-shadow: 0 0 5px light-dark(var(--light-board-glow), var(--dark-board-glow));;
+    box-shadow: 0 0 5px light-dark(var(--light-board-glow), var(--dark-board-glow));
     /* Repeat the boxes 30 times */
     grid-template-columns: repeat(30, 1fr);
     grid-template-rows: repeat(30, 1fr);
+    
+    /* Cell borders */
+    background-image:
+        linear-gradient(
+            to right,
+            light-dark(var(--light-board-boarder), var(--dark-board-boarder)) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            light-dark(var(--light-board-boarder), var(--dark-board-boarder)) 1px,
+            transparent 1px
+        );
+
+    background-size: calc(100% / 30) calc(100% / 30);
 }
 
 .snake-head {
     background-color: #ffffff;
     border-radius: 5px;
-    box-shadow:0 0 10px rgb(252, 252, 252);
+    box-shadow:0 0 7px rgb(252, 252, 252);
 }
 
 .snake-food {
     background-color: #ef4444;
-    box-shadow:0 0 10px rgb(255, 0, 0);
+    /* box-shadow:0 0 7px rgb(255, 0, 0); */
     border-radius: 100%;
+    border: 2px groove black;
 }
 
 .snake-body {
     background-color: light-dark(var(--light-snake-body), var(--dark-snake-body));
-    border-radius: 7px;
-    box-shadow: 0 0 7px light-dark(var(--light-snake-body-glow), var(--dark-snake-body-glow));
+    border-radius: 8px;
+    box-shadow: 0 0 4px light-dark(var(--light-snake-body-glow), var(--dark-snake-body-glow));
 }
 
 
